@@ -1,0 +1,7 @@
+# Ruby 2.4 is the minimum requirement
+ruby ['2.4.0', RUBY_VERSION].max
+
+# Ignore the next call
+def ruby(*); end
+
+eval File.read(File.expand_path('Gemfile', File.dirname(__FILE__)))

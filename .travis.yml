@@ -5,6 +5,9 @@ services:
   - docker
   - mysql
   - postgresql
+gemfile:
+  - Gemfile
+  - Gemfile-ruby24
 env:
   global:
     - APP_SECRET_TOKEN=b2724973fd81c2f4ac0f92ac48eb3f0152c4a11824c122bcf783419a4c51d8b9bba81c8ba6a66c7de599677c7f486242cf819775c433908e77c739c5c8ae118d
@@ -21,21 +24,29 @@ env:
     - RSPEC_TASK=spec:features
 matrix:
   exclude:
+    - gemfile: Gemfile
+    - gemfile: Gemfile-ruby24
     - env: DOCKER_IMAGE=cantino/huginn-single-process DOCKERFILE=docker/single-process/Dockerfile
     - env: DOCKER_IMAGE=cantino/huginn DOCKERFILE=docker/multi-process/Dockerfile
     - env: RSPEC_TASK=spec:features
   include:
     - rvm: 2.4.0
+      gemfile: Gemfile-ruby24
       env: DATABASE_ADAPTER=mysql2 DOCKER_IMAGE=cantino/huginn-single-process DOCKERFILE=docker/single-process/Dockerfile
     - rvm: 2.4.0
+      gemfile: Gemfile-ruby24
       env: DATABASE_ADAPTER=mysql2 DOCKER_IMAGE=cantino/huginn DOCKERFILE=docker/multi-process/Dockerfile
     - rvm: 2.4.0
+      gemfile: Gemfile-ruby24
       env: RSPEC_TASK=spec:features DATABASE_ADAPTER=mysql2
     - rvm: 2.4.0
+      gemfile: Gemfile-ruby24
       env: RSPEC_TASK=spec:features DATABASE_ADAPTER=postgresql DATABASE_USERNAME=postgres
     - rvm: 2.3.3
+      gemfile: Gemfile
       env: RSPEC_TASK=spec:features DATABASE_ADAPTER=mysql2
     - rvm: 2.3.3
+      gemfile: Gemfile
       env: RSPEC_TASK=spec:features DATABASE_ADAPTER=postgresql DATABASE_USERNAME=postgres
 rvm:
 - 2.2
